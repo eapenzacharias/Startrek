@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 function component() {
   const element = document.createElement('div');
   element.innerHTML = 'Hello World';
