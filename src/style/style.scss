@@ -1,3 +1,15 @@
 body {
-  background-color: blue;
+  //background-color: blue;
+  background-image: url("https://intl.startrek.com/themes/custom/startrekbs/images/bg_site-constrain_stars_2000x1080.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  nav {
+    font-size: 1.3rem;
+    .navbar-nav {
+      li {
+        padding: 0 1.5rem;
+      }
+    }
+  }
 }

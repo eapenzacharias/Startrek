@@ -1,4 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getElement } from './scripts/querySelectors';
+import { header } from './scripts/uiInit';
 import './style/style.scss';
 
 function component() {
@@ -7,4 +9,4 @@ function component() {
   return element;
 }
 
-document.body.appendChild(component());
+getElement('#main').appendChild(header());
