@@ -14,3 +14,4 @@ node_modules/
 .eslintrc.json/
 .hintrc/
 .stylelintrc
+.DS_Store
