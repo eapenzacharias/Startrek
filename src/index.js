@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './style/style.scss';
 
 function component() {
   const element = document.createElement('div');
