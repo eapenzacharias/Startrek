@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getElement } from './scripts/querySelectors';
-import { header } from './scripts/uiInit';
+import { header,footer } from './scripts/uiInit';
 import './style/style.scss';
 
 function component() {
@@ -10,3 +10,4 @@ function component() {
 }
 
 getElement('#main').appendChild(header());
+getElement('#main').appendChild(footer());

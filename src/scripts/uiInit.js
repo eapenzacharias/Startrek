@@ -45,4 +45,16 @@ const header = () => {
   return nav;
 };
 
-export { header };
+const footer=()=>{
+  const footer = createElement('footer');
+  footer.className = 'navbar navbar-expand footer';
+  const container = createElement('div');
+  container.className = 'container-fluid';
+  container.innerText="Create by Microverse under CC license"; 
+  
+  
+  footer.appendChild(container);
+  return footer;
+};
+
+export { header, footer };
