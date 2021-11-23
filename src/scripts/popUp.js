@@ -1,9 +1,6 @@
 import { createElement } from './querySelectors.js';
 
-const popUp = () => {
-  const loadRocketLocalStorage = sessionStorage.getItem('rocketsData');
-  const array = JSON.parse(loadRocketLocalStorage);
-
+const popUp = (item) => {
   const modal = createElement('div');
   modal.className = 'modal fade ';
   modal.id = 'staticBackdrop';
@@ -20,7 +17,7 @@ const popUp = () => {
   const modalTitle = createElement('h5');
   modalTitle.className = 'modal-title';
   modalTitle.id = 'staticBackdropLabel';
-  modalTitle.innerText = array[0].name;
+  modalTitle.innerText = item.name;
   const btnClose = createElement('button');
   btnClose.className = 'btn-close white';
   btnClose.id = 'btnClose';
@@ -40,7 +37,7 @@ const popUp = () => {
   row1.appendChild(col1);
   const imgMain = createElement('img');
   imgMain.className = 'img-fluid ';
-  const imgSRC = array[0].flickr_images[0];
+  const imgSRC = item.flickr_images[0];
   imgMain.src = imgSRC;
   col1.appendChild(imgMain);
 
@@ -49,7 +46,7 @@ const popUp = () => {
   containerFluid.appendChild(rowTitle);
   const bigTitle = createElement('h1');
   bigTitle.className = 'col-12 text-center';
-  bigTitle.innerText = array[0].name;
+  bigTitle.innerText = item.name;
   rowTitle.appendChild(bigTitle);
 
   const row2 = createElement('div');
@@ -57,12 +54,12 @@ const popUp = () => {
   containerFluid.appendChild(row2);
   const col21 = createElement('div');
   col21.className = 'col-8';
-  col21.innerText = `Propellant: ${array[0].engines.propellant_1}`;
+  col21.innerText = `Propellant: ${item.engines.propellant_1}`;
   row2.appendChild(col21);
 
   const col22 = createElement('div');
   col22.className = 'col-4';
-  col22.innerText = `Type: ${array[0].engines.type}`;
+  col22.innerText = `Type: ${item.engines.type}`;
   row2.appendChild(col22);
 
   const row3 = createElement('div');
@@ -70,7 +67,7 @@ const popUp = () => {
   containerFluid.appendChild(row3);
   const col3 = createElement('div');
   col3.className = 'col-12 red';
-  col3.innerText = array[0].description;
+  col3.innerText = item.description;
   row3.appendChild(col3);
 
   const numbersComments = createElement('div');

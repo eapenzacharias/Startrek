@@ -1,3 +1,4 @@
+import popUp from './popUp.js';
 import { createElement, getElement } from './querySelectors.js';
 
 const cardTemplate = (item) => {
@@ -28,6 +29,8 @@ const generateCards = (item) => {
   commentBtn.innerText = 'Comments';
   commentBtn.addEventListener('click', () => {
     commentBtn.className = 'btn btn-sm btn-dark';
+    getElement('#main').appendChild(popUp(item));
+    document.getElementById('staticBackdrop').classList = 'displayModal show fade modal';
   });
   const likeBtn = createElement('span');
   likeBtn.className = 'like-btn btn btn-sm';
