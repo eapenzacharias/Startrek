@@ -7,5 +7,5 @@ import './style/style.scss';
 getElement('#main').appendChild(header());
 getElement('#main').appendChild(footer());
 
-console.log(rockets());
-console.log(ships());
+rockets();
+ships();
