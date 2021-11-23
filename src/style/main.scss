@@ -1,3 +1,15 @@
-.popup {
-  background-color: #acacac63;
+#card-container {
+  align-content: center;
+  .card {
+    background-color: #ffffff10;
+    max-width: 500px;
+    margin: 1rem;
+    img {
+      height: 300px;
+      object-fit: fill;
+    }
+    .card-body {
+      color: #f5f3f3;
+    }
+  }
 }
