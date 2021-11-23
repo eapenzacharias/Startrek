@@ -52,7 +52,6 @@ const footer = () => {
   container.className = 'container-fluid';
   container.innerText = 'Create by Microverse under CC license';
 
-
   footer.appendChild(container);
   return footer;
 };

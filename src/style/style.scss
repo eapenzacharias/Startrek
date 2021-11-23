@@ -14,12 +14,15 @@ body {
 
   nav {
     font-size: 1.3rem;
+
     .navbar-nav {
       li {
         padding: 0 1.5rem;
+
         .nav-link {
           color: #f5f3f3;
         }
+
         .nav-link:hover {
           background-color: #949494;
         }
