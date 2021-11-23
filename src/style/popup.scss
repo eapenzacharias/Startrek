@@ -1,3 +1,26 @@
 .card {
   background-color: #acacac63;
 }
+
+.displayModal {
+  display: block;
+}
+
+.addtxt {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  font-size: 13px;
+  width: 350px;
+  background-color: #e5e8ed;
+  font-weight: 500;
+}
+
+.form-control {
+  color: rgb(255, 255, 255);
+}
+
+.transparent {
+  background-color: rgba($color: #000, $alpha: 0.7);
+  color: white;
+}
