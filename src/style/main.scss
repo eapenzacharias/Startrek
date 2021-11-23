@@ -10,6 +10,20 @@
     }
     .card-body {
       color: #f5f3f3;
+      .like-btn {
+        display: inline-block;
+        min-width: 30px;
+        min-height: 30px;
+        margin: 0 2rem;
+        background-image: url(../assets/heart-outline.svg);
+        background-color: #f5f3f3;
+        background-position: center;
+        background-size: 20px 20px;
+        background-repeat: no-repeat;
+      }
+      .liked {
+        background-image: url(../assets/heart-filled.svg);
+      }
     }
   }
 }

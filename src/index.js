@@ -10,4 +10,4 @@ getElement('#main').appendChild(footer());
 
 rockets();
 ships();
-mainDisplay();
+mainDisplay('rocketsData');
