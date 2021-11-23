@@ -7,7 +7,7 @@ body {
   background-size: cover;
   height: 100%;
 
-  .container {
+  #main {
     height: 100vh;
     min-height: 100vh;
     position: relative;
@@ -22,10 +22,17 @@ body {
 
         .nav-link {
           color: #f5f3f3;
+          padding-left: 1rem;
+          padding-right: 1rem;
         }
 
         .nav-link:hover {
-          background-color: #949494;
+          border-radius: 0.5rem;
+          background-color: #ffffff1a;
+        }
+
+        .nav-link:active {
+          text-decoration: underline;
         }
       }
     }

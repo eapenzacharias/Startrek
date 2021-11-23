@@ -1,15 +1,19 @@
 #card-container {
   align-content: center;
+
   .card {
     background-color: #ffffff10;
     max-width: 500px;
     margin: 1rem;
+
     img {
       height: 300px;
       object-fit: fill;
     }
+
     .card-body {
       color: #f5f3f3;
+
       .like-btn {
         display: inline-block;
         min-width: 30px;
@@ -21,6 +25,7 @@
         background-size: 20px 20px;
         background-repeat: no-repeat;
       }
+
       .liked {
         background-image: url(../assets/heart-filled.svg);
       }

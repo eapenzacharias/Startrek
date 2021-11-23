@@ -1,47 +1,58 @@
+import mainDisplay from './mainDisplay.js';
 import { createElement } from './querySelectors.js';
 
-const header = () => {
+const navHeader = () => {
   const nav = createElement('nav');
   nav.className = 'navbar navbar-expand';
   const container = createElement('div');
   container.className = 'container-fluid';
-
   const logoContainer = createElement('a');
   logoContainer.className = 'navbar-brand';
   const logo = createElement('img');
   logo.src = 'https://intl.startrek.com/themes/custom/startrekbs/images/star-trek-logo.png';
   const navHeader = createElement('div');
   navHeader.className = 'navbar-header';
+  logoContainer.appendChild(logo);
+  navHeader.appendChild(logoContainer);
+  container.appendChild(navHeader);
+  return [nav, container];
+};
 
+const menuEvents = (rockets, ships) => {
+  rockets.addEventListener('click', () => {
+    rockets.classList.toggle('active');
+    mainDisplay('rocketsData');
+  });
+  ships.addEventListener('click', () => {
+    ships.classList.toggle('active');
+    mainDisplay('dragonsData');
+  });
+  return [rockets, ships];
+};
+
+const header = () => {
+  const [nav, container] = navHeader();
   const menu = createElement('ul');
   menu.className = 'nav navbar-nav';
-
   const rocketContainer = createElement('li');
-  const rockets = createElement('a');
+  let rockets = createElement('a');
   rockets.className = 'nav-link';
   rockets.innerText = 'Rockets';
+  const shipsContainer = createElement('li');
+  let ships = createElement('a');
+  ships.className = 'nav-link';
+  ships.innerText = 'Capsules';
+  [rockets, ships] = menuEvents(rockets, ships);
   rocketContainer.appendChild(rockets);
   menu.appendChild(rocketContainer);
-
-  const shipsContainer = createElement('li');
-  const ships = createElement('a');
-  ships.className = 'nav-link';
-  ships.innerText = 'Ships';
   shipsContainer.appendChild(ships);
   menu.appendChild(shipsContainer);
-
   const menuDiv = createElement('div');
   menuDiv.className = 'nav navbar-nav';
   menuDiv.id = 'navbarNav';
   menuDiv.appendChild(menu);
-
-  logoContainer.appendChild(logo);
-  navHeader.appendChild(logoContainer);
-
-  container.appendChild(navHeader);
   container.appendChild(menu);
   nav.appendChild(container);
-
   return nav;
 };
 

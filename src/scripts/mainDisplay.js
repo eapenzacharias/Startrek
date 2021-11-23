@@ -41,10 +41,11 @@ const generateCards = (item) => {
 };
 
 const mainDisplay = (id) => {
+  getElement('#card-container').innerHTML = '';
   const ships = JSON.parse(sessionStorage.getItem(id));
   ships.forEach((e) => {
     generateCards(e);
   });
 };
 
-export { mainDisplay };
+export default mainDisplay;

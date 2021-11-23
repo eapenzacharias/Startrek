@@ -11,15 +11,15 @@ const rockets = async () => {
   return rocketsData;
 };
 
-const ships = async () => {
-  let shipsData = '';
-  await fetch(`${url}ships`)
+const dragons = async () => {
+  let dragonsData = '';
+  await fetch(`${url}dragons`)
     .then((res) => res.json())
     .then((data) => {
-      shipsData = data;
-      window.sessionStorage.setItem('shipsData', JSON.stringify(shipsData));
+      dragonsData = data;
+      window.sessionStorage.setItem('dragonsData', JSON.stringify(dragonsData));
     });
-  return shipsData;
+  return dragonsData;
 };
 
-export { rockets, ships };
+export { rockets, dragons };
