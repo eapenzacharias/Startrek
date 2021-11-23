@@ -1,14 +1,14 @@
+@import "./main.scss";
+@import "./popup.scss";
+
 body {
-  //background-color: blue;
   background-image: url("https://intl.startrek.com/themes/custom/startrekbs/images/bg_site-constrain_stars_2000x1080.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100%;
-  //background-color: violet;
   .container {
     height: 100vh;
     min-height: 100vh;
-    //background-color: white;
     position: relative;
   }
 
