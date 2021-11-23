@@ -1,8 +1,8 @@
-import { createElement } from "./querySelectors";
+import { createElement } from './querySelectors.js';
 
 const header = () => {
   const nav = createElement('nav');
-  nav.className = 'navbar navbar-dark navbar-expand-lg';
+  nav.className = 'navbar navbar-expand';
   const container = createElement('div');
   container.className = 'container-fluid';
 
@@ -41,7 +41,6 @@ const header = () => {
   container.appendChild(navHeader);
   container.appendChild(menu);
   nav.appendChild(container);
-
 
   return nav;
 };
