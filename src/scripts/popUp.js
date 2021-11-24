@@ -1,7 +1,7 @@
 import { create } from 'lodash';
 import { createElement, getElement } from './querySelectors.js';
 
-const popUp = (item) => {
+const popUp =  (item) => {
   const modal = createElement('div');
   modal.className = 'modal fade ';
   modal.id = 'staticBackdrop';
@@ -76,8 +76,7 @@ const popUp = (item) => {
   containerFluid.appendChild(numbersComments);
   const numbersCommentsTitle = createElement('h4');
   numbersCommentsTitle.className = 'col-12 text-center';
-  numbersCommentsTitle.innerText = 'Comments(2)';
-  numbersComments.appendChild(numbersCommentsTitle);
+  numbersCommentsTitle.id='numbersCommentsTitle';
 
   const row4 = createElement('div');
   row4.className = 'row';
@@ -89,6 +88,10 @@ const popUp = (item) => {
   const allComments = createElement('div');
   allComments.className = 'd-flex justify-content-center py-2';
   allComments.id='allComments';
+  ReceiveComments(item.id);
+  numbersCommentsTitle.innerText = `Comments(0)`;
+  numbersComments.appendChild(numbersCommentsTitle);
+
   col4.appendChild(allComments);
   const singleCommentContainer = createElement('div');
   singleCommentContainer.className = '';
@@ -130,7 +133,12 @@ const popUp = (item) => {
   btnComment.innerText='Comment',
   btnComment.addEventListener('click', ()=>{
     sendComment(item.id, txtName.value,txtComment.value);
+    
+    ReceiveComments(item.id);
+    txtName.value='';
+    txtComment.value='';  
   });
+  
   
   containerFluid.appendChild(btnComment);
 
@@ -142,6 +150,8 @@ const popUp = (item) => {
   modalContent.appendChild(modalBody);
 
   modal.appendChild(modalDialog);
+
+  
 
   return modal;
 };
@@ -159,59 +169,50 @@ export const sendComment= async (id,user,comment)=>{
         }
       ),
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-type': 'application/json; charset=UTF-8',
+      },      
     });
-    document.getElementById('txtName').value='';
-    document.getElementById('txtComment').value='';    
+  
   }catch(error){
     console.log("ERROR: "+error);
   }
 
 };
 
-export const ReceiveComments=async()=>{
+export const ReceiveComments=async(id)=>{
+
   let items;
   try{
-    const URL = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=5e9d0d95eda69955f709d1eb',{
-      method:'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+    const URL = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=${id}`,{
+      method:'GET',     
     });
     items=await URL.json();
-    console.log(items);
+
+    // console.log(items);
   }catch(error){
     console.log('ERROR IN GET: '+error);
   }
-
-  let arrCommentsResult=[];
-  arrCommentsResult=items;
-  console.log(arrCommentsResult);
+  console.log('HERE');
+  
   const allCommentsContainer=document.getElementById('allComments');
-  
+  allCommentsContainer.innerHTML='';
   const ulComments=createElement('ul');
-  ulComments.id='ulComments'
-  // ulComments.innerHTML ='';
+  ulComments.id='ulComments'  
   ulComments.className='';
-  // allCommentsContainer.appendChild(ulComments);
+
   
-  if(arrCommentsResult.length){
-    for(let j=0; j<arrCommentsResult.length; j+=1){
+  if(items.length){
+    for(let j=0; j<items.length; j+=1){
       const lsComments=createElement('li');
-      lsComments.innerText=arrCommentsResult[j].comment;
+      lsComments.innerText=items[j].comment;
       ulComments.appendChild(lsComments);
-      console.log('call GET');
-      console.log(arrCommentsResult[j].comment);      
     }
-  console.log(ulComments);
-  
-  
+  allCommentsContainer.appendChild(ulComments);
+  getElement('#numbersCommentsTitle').innerHTML=`Comments: ${items.length}`;
   } else{
     console.log('NO COMMENTS');
   }
-  
+  return items.length;
 };
 
-ReceiveComments();
 export default popUp;
