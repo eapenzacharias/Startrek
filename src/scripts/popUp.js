@@ -4,7 +4,6 @@ const popUp = (item) => {
   const modal = createElement('div');
   modal.className = 'modal fade ';
   modal.id = 'staticBackdrop';
-  console.log(item);
 
   const modalDialog = createElement('div');
   modalDialog.className = 'modal-dialog modal-xl ';

@@ -3,23 +3,6 @@ import mainDisplay from './mainDisplay.js';
 import { createElement, getElement } from './querySelectors.js';
 import { dragons, rockets } from './spaceData.js';
 
-const navHeader = () => {
-  const nav = createElement('nav');
-  nav.className = 'navbar navbar-expand';
-  const container = createElement('div');
-  container.className = 'container-fluid';
-  const logoContainer = createElement('a');
-  logoContainer.className = 'navbar-brand';
-  const logo = createElement('img');
-  logo.src = 'https://intl.startrek.com/themes/custom/startrekbs/images/star-trek-logo.png';
-  const navHeader = createElement('div');
-  navHeader.className = 'navbar-header';
-  logoContainer.appendChild(logo);
-  navHeader.appendChild(logoContainer);
-  container.appendChild(navHeader);
-  return [nav, container];
-};
-
 const menuEvents = (rockets, ships) => {
   rockets.addEventListener('click', () => {
     rockets.classList.toggle('active');
