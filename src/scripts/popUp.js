@@ -1,4 +1,5 @@
-import { createElement } from './querySelectors.js';
+import { create } from 'lodash';
+import { createElement, getElement } from './querySelectors.js';
 
 const popUp = (item) => {
   const modal = createElement('div');
@@ -87,6 +88,7 @@ const popUp = (item) => {
 
   const allComments = createElement('div');
   allComments.className = 'd-flex justify-content-center py-2';
+  allComments.id='allComments';
   col4.appendChild(allComments);
   const singleCommentContainer = createElement('div');
   singleCommentContainer.className = '';
@@ -112,13 +114,26 @@ const popUp = (item) => {
   commentForm.appendChild(nameContent);
   const txtName = createElement('input');
   txtName.className = 'form-control mb-3 col-6';
+  txtName.id='txtName';
   txtName.placeholder = 'Your name';
   commentForm.appendChild(txtName);
 
   const txtComment = createElement('input');
   txtComment.className = 'form-control';
   txtComment.placeholder = 'Your insights';
+  txtComment.id='txtComment ';
   commentForm.appendChild(txtComment);
+
+  const btnComment=createElement('button');
+  btnComment.className='';
+  btnComment.id='btnComment',
+  btnComment.innerText='Comment',
+  btnComment.addEventListener('click', ()=>{
+    sendComment(item.id, txtName.value,txtComment.value);
+  });
+  
+  containerFluid.appendChild(btnComment);
+
 
   modalDialog.appendChild(modalContent);
   modalContent.appendChild(modalHeader);
@@ -131,4 +146,72 @@ const popUp = (item) => {
   return modal;
 };
 
+
+export const sendComment= async (id,user,comment)=>{
+  try{
+    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments',{
+      method: 'POST',
+      body: JSON.stringify(
+        {
+          item_id: id,
+          username: user,
+          comment: comment,         
+        }
+      ),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    document.getElementById('txtName').value='';
+    document.getElementById('txtComment').value='';    
+  }catch(error){
+    console.log("ERROR: "+error);
+  }
+
+};
+
+export const ReceiveComments=async()=>{
+  let items;
+  try{
+    const URL = await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=5e9d0d95eda69955f709d1eb',{
+      method:'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    items=await URL.json();
+    console.log(items);
+  }catch(error){
+    console.log('ERROR IN GET: '+error);
+  }
+
+  let arrCommentsResult=[];
+  arrCommentsResult=items;
+  console.log(arrCommentsResult);
+  const allCommentsContainer=document.getElementById('allComments');
+  
+  const ulComments=createElement('ul');
+  ulComments.id='ulComments'
+  // ulComments.innerHTML ='';
+  ulComments.className='';
+  // allCommentsContainer.appendChild(ulComments);
+  
+  if(arrCommentsResult.length){
+    for(let j=0; j<arrCommentsResult.length; j+=1){
+      const lsComments=createElement('li');
+      lsComments.innerText=arrCommentsResult[j].comment;
+      ulComments.appendChild(lsComments);
+      console.log('call GET');
+      console.log(arrCommentsResult[j].comment);      
+    }
+  console.log(ulComments);
+  
+  
+  } else{
+    console.log('NO COMMENTS');
+  }
+  
+};
+
+ReceiveComments();
 export default popUp;

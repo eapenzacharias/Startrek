@@ -51,4 +51,5 @@ const mainDisplay = (id) => {
   });
 };
 
+
 export default mainDisplay;
