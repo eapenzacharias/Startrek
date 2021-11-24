@@ -24,8 +24,11 @@ const getLikes = async () => {
     });
 };
 
-// const likesCounter = () => {
+const likesCounter = (likesData, index) => {
+  likesData[index].likes += 1;
+  const count = likesData[index].likes;
+  window.sessionStorage.setItem('likesData', JSON.stringify(likesData));
+  return count;
+};
 
-// }
-
-export { postLikes, getLikes };
+export { postLikes, getLikes, likesCounter };

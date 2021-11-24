@@ -1,4 +1,4 @@
-import { postLikes } from './interaction.js';
+import { likesCounter, postLikes } from './interaction.js';
 import popUp from './popUp.js';
 import { createElement, getElement } from './querySelectors.js';
 
@@ -33,10 +33,8 @@ const liker = (id, likesCount) => {
     objIndex = likesData.findIndex((obj) => obj.item_id === id);
   }
   likedIDs.push(id);
-  likesData[objIndex].likes += 1;
-  window.sessionStorage.setItem('likesData', JSON.stringify(likesData));
   window.sessionStorage.setItem('likedIDs', JSON.stringify(likedIDs));
-  likesCount.innerText = likesData[objIndex].likes;
+  likesCount.innerText = likesCounter(likesData, objIndex);
   postLikes(id);
 };
 
