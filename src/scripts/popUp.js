@@ -1,4 +1,72 @@
-import { createElement } from './querySelectors.js';
+import { createElement, getElement } from './querySelectors.js';
+
+export const sendComment = async (id, user, comment) => {
+  try {
+    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments', {
+      method: 'POST',
+      body: JSON.stringify(
+        {
+          item_id: id,
+          username: user,
+          comment,
+        },
+      ),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+  } catch (error) {
+    // console.log(`ERROR: ${error}`);
+  }
+};
+
+export const ReceiveComments = async (id) => {
+  let items;
+  try {
+    const URL = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=${id}`, {
+      method: 'GET',
+    });
+    items = await URL.json();
+  } catch (error) {
+    // console.log(`ERROR IN GET: ${error}`);
+  }
+
+  const allCommentsContainer = document.getElementById('allComments');
+  allCommentsContainer.innerHTML = '';
+  const ulComments = createElement('div');
+  ulComments.id = 'ulComments';
+  ulComments.className = '';
+
+  if (items.length) {
+    for (let j = 0; j < items.length; j += 1) {
+      const lsComments = createElement('div');
+      ulComments.appendChild(lsComments);
+
+      const figure = createElement('figure');
+      figure.className = 'text-left';
+      lsComments.appendChild(figure);
+
+      const blockquoteItem = createElement('blockquote');
+      blockquoteItem.className = 'blockquote';
+      figure.appendChild(blockquoteItem);
+
+      const commentText = createElement('p');
+      commentText.className = 'alert alert-dark h6';
+      commentText.innerText = items[j].comment;
+      blockquoteItem.appendChild(commentText);
+
+      const figcaption = createElement('figcaption');
+      figcaption.className = 'footer text-light h6  smallText';
+      figure.appendChild(figcaption);
+      figcaption.innerText = `${items[j].creation_date} Comment by:  ${items[j].username}`;
+    }
+    allCommentsContainer.appendChild(ulComments);
+    getElement('#numbersCommentsTitle').innerHTML = `Comments  (${items.length})`;
+  } else {
+    // console.log('NO COMMENTS');
+  }
+  return items.length;
+};
 
 const popUp = (item) => {
   const modal = createElement('div');
@@ -19,7 +87,7 @@ const popUp = (item) => {
   modalTitle.id = 'staticBackdropLabel';
   modalTitle.innerText = item.name;
   const btnClose = createElement('button');
-  btnClose.className = 'btn-close white';
+  btnClose.className = 'btn-close btn-close-white';
   btnClose.id = 'btnClose';
 
   const modalBody = createElement('div');
@@ -50,17 +118,65 @@ const popUp = (item) => {
   rowTitle.appendChild(bigTitle);
 
   const row2 = createElement('div');
-  row2.className = 'row';
+  row2.className = 'row table-responsive';
   containerFluid.appendChild(row2);
-  const col21 = createElement('div');
-  col21.className = 'col-8';
-  col21.innerText = `Propellant: ${item.engines.propellant_1}`;
-  row2.appendChild(col21);
 
-  const col22 = createElement('div');
-  col22.className = 'col-4';
-  col22.innerText = `Type: ${item.engines.type}`;
-  row2.appendChild(col22);
+  const detailTable = createElement('table');
+  detailTable.className = 'table table-dark table-borderless table-sm';
+  row2.appendChild(detailTable);
+
+  const thead = createElement('thead');
+  thead.className = '';
+  detailTable.appendChild(thead);
+
+  const trHead = createElement('tr');
+  trHead.className = 'table-dark ';
+  thead.appendChild(trHead);
+
+  const thHead1 = createElement('th');
+  thHead1.scope = 'col';
+  thHead1.innerText = 'First Flight';
+  trHead.appendChild(thHead1);
+
+  const thHead2 = createElement('th');
+  thHead2.scope = 'col';
+  thHead2.innerText = 'Active';
+  trHead.appendChild(thHead2);
+
+  const thHead3 = createElement('th');
+  thHead3.scope = 'col';
+  thHead3.innerText = 'Check details';
+  trHead.appendChild(thHead3);
+
+  const tbody = createElement('tbody');
+  detailTable.appendChild(tbody);
+
+  const trBody = createElement('tr');
+  trBody.className = 'table-dark table-active';
+  tbody.appendChild(trBody);
+
+  const col21 = createElement('th');
+  col21.className = 'col-4 table-dark"';
+  col21.innerText = item.first_flight;
+  trBody.appendChild(col21);
+
+  const col22 = createElement('td');
+  col22.className = 'col-4 table-dark"';
+  col22.innerText = item.active;
+  trBody.appendChild(col22);
+
+  const col23 = createElement('td');
+  col23.className = 'col-4 table-dark"';
+
+  trBody.appendChild(col23);
+
+  const anchorWiki = createElement('a');
+
+  anchorWiki.setAttribute('href', item.wikipedia);
+  anchorWiki.setAttribute('target', '_blank');
+  anchorWiki.className = 'btn btn-light btn-sm';
+  anchorWiki.innerText = 'Show official information';
+  col23.appendChild(anchorWiki);
 
   const row3 = createElement('div');
   row3.className = 'row';
@@ -75,8 +191,7 @@ const popUp = (item) => {
   containerFluid.appendChild(numbersComments);
   const numbersCommentsTitle = createElement('h4');
   numbersCommentsTitle.className = 'col-12 text-center';
-  numbersCommentsTitle.innerText = 'Comments(2)';
-  numbersComments.appendChild(numbersCommentsTitle);
+  numbersCommentsTitle.id = 'numbersCommentsTitle';
 
   const row4 = createElement('div');
   row4.className = 'row';
@@ -87,14 +202,15 @@ const popUp = (item) => {
 
   const allComments = createElement('div');
   allComments.className = 'd-flex justify-content-center py-2';
+  allComments.id = 'allComments';
+  ReceiveComments(item.id);
+  numbersCommentsTitle.innerText = 'Comments(0)';
+  numbersComments.appendChild(numbersCommentsTitle);
+
   col4.appendChild(allComments);
   const singleCommentContainer = createElement('div');
   singleCommentContainer.className = '';
   allComments.appendChild(singleCommentContainer);
-  const lblComment = createElement('span');
-  lblComment.className = 'text1';
-  lblComment.innerText = 'Ths is the first hard comment';
-  singleCommentContainer.appendChild(lblComment);
 
   const addComment = createElement('div');
   addComment.className = 'row';
@@ -105,20 +221,48 @@ const popUp = (item) => {
   addComment.appendChild(addCommentTitle);
 
   const commentForm = createElement('div');
-  commentForm.className = 'row';
+  commentForm.className = 'col-12 col-lg-10 ';
   containerFluid.appendChild(commentForm);
-  const nameContent = createElement('div');
-  nameContent.className = 'col-12';
-  commentForm.appendChild(nameContent);
-  const txtName = createElement('input');
-  txtName.className = 'form-control mb-3 col-6';
-  txtName.placeholder = 'Your name';
-  commentForm.appendChild(txtName);
 
-  const txtComment = createElement('input');
-  txtComment.className = 'form-control';
+  const nameContent = createElement('div');
+  nameContent.className = 'input-group mb-3 col-4';
+  commentForm.appendChild(nameContent);
+
+  const spanForm = createElement('span');
+  spanForm.className = 'input-group-text btn btn-dark';
+  spanForm.innerText = '@';
+  nameContent.appendChild(spanForm);
+
+  const txtName = createElement('input');
+  txtName.className = 'span-4';
+  txtName.id = 'txtName';
+  txtName.placeholder = 'Your name';
+  nameContent.appendChild(txtName);
+
+  const commentContent = createElement('div');
+  commentContent.className = 'input-group mb-3';
+  commentForm.appendChild(commentContent);
+
+  const txtComment = createElement('textarea');
+  txtComment.className = 'form-control col-4';
   txtComment.placeholder = 'Your insights';
-  commentForm.appendChild(txtComment);
+  txtComment.id = 'txtComment ';
+  commentContent.appendChild(txtComment);
+
+  const btnComment = createElement('button');
+  btnComment.className = 'btn btn-dark';
+  btnComment.id = 'btnComment';
+  btnComment.innerText = 'Comment';
+  btnComment.addEventListener('click', async () => {
+    if (txtName.value.length > 0 && txtComment.value.length > 0) {
+      await sendComment(item.id, txtName.value, txtComment.value)
+        .then(() => ReceiveComments(item.id));
+      txtName.value = '';
+      txtComment.value = '';
+    }
+  });
+
+  containerFluid.appendChild(btnComment);
 
   modalDialog.appendChild(modalContent);
   modalContent.appendChild(modalHeader);
