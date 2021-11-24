@@ -13,4 +13,19 @@ const postLikes = async (itemID) => {
   });
 };
 
-export { postLikes };
+const getLikes = async () => {
+  let likesData;
+  await fetch(`${url}${appID}/likes`)
+    .then((res) => res.json())
+    .then((data) => {
+      likesData = data;
+      window.sessionStorage.setItem('likesData', JSON.stringify(likesData));
+      return likesData;
+    });
+};
+
+// const likesCounter = () => {
+
+// }
+
+export { postLikes, getLikes };
