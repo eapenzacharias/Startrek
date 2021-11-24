@@ -1,5 +1,7 @@
+import { getLikes } from './interaction.js';
 import mainDisplay from './mainDisplay.js';
 import { createElement } from './querySelectors.js';
+import { dragons, rockets } from './spaceData.js';
 
 const navHeader = () => {
   const nav = createElement('nav');
@@ -67,4 +69,11 @@ const footer = () => {
   return footer;
 };
 
-export { header, footer };
+const appInit = async () => {
+  await rockets()
+    .then(() => dragons())
+    .then(() => getLikes())
+    .then(() => mainDisplay('rocketsData'));
+};
+
+export { header, footer, appInit };
