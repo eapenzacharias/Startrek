@@ -16,11 +16,11 @@
   font-weight: 500;
 }
 
-.form-control {
-  // color: rgb(255, 255, 255);
-}
-
 .transparent {
   background-color: rgba($color: #000, $alpha: 0.7);
   color: white;
+}
+
+.smallText {
+  font-size: 0.75rem;
 }
