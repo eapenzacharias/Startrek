@@ -38,13 +38,10 @@ body {
     }
   }
 
-  footer {
-    position: absolute;
+  .footer {
     border-top: #414141 0.1px solid;
-    bottom: 3rem;
-    height: 3rem;
-    color: #f5f3f3;
+    color: #f5f3f3a4;
     padding: 1rem 0;
-    width: 100%;
+    margin-top: 3rem;
   }
 }
