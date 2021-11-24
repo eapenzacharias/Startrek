@@ -25,19 +25,47 @@ const cardTemplate = (item) => {
 
 const liker = (id, likesCount) => {
   const likesData = JSON.parse(sessionStorage.getItem('likesData'));
+  let likedIDs = JSON.parse(sessionStorage.getItem('likedIDs'));
+  if (!likedIDs) likedIDs = [];
   let objIndex = likesData.findIndex((obj) => obj.item_id === id);
   if (objIndex === -1) {
     likesData.push({ likes: 0, item_id: id });
     objIndex = likesData.findIndex((obj) => obj.item_id === id);
   }
+  likedIDs.push(id);
   likesData[objIndex].likes += 1;
   window.sessionStorage.setItem('likesData', JSON.stringify(likesData));
+  window.sessionStorage.setItem('likedIDs', JSON.stringify(likedIDs));
   likesCount.innerText = likesData[objIndex].likes;
   postLikes(id);
 };
 
-const generateCards = (item) => {
+const setLikeSpan = (id) => {
   const likesData = JSON.parse(sessionStorage.getItem('likesData'));
+  let likedIDs = JSON.parse(sessionStorage.getItem('likedIDs'));
+  if (!likedIDs) likedIDs = [];
+  const likeBtn = createElement('span');
+  likeBtn.className = 'like-btn btn btn-sm';
+  const likeCount = createElement('span');
+  likeCount.className = 'like-count btn btn-sm';
+  likeCount.innerText = '0';
+
+  if (likedIDs.find((e) => e === id)) {
+    likeBtn.className = 'like-btn btn btn-sm liked';
+  } else {
+    likeBtn.addEventListener('click', () => {
+      likeBtn.className = 'like-btn btn btn-sm liked';
+      liker(id, likeCount);
+    }, { once: true });
+  }
+  const likes = likesData.filter((e) => e.item_id === id);
+  if (likes.length > 0) {
+    likeCount.innerText = likes[0].likes;
+  }
+  return [likeBtn, likeCount];
+};
+
+const generateCards = (item) => {
   const [card, cardBody] = cardTemplate(item);
   const commentBtn = createElement('a');
   commentBtn.className = 'btn btn-sm btn-light';
@@ -47,19 +75,7 @@ const generateCards = (item) => {
     getElement('#main').appendChild(popUp(item));
     document.getElementById('staticBackdrop').classList = 'displayModal show fade modal';
   });
-  const likeBtn = createElement('span');
-  likeBtn.className = 'like-btn btn btn-sm';
-  const likeCount = createElement('span');
-  likeCount.className = 'like-count btn btn-sm';
-  likeCount.innerText = '0';
-  likeBtn.addEventListener('click', () => {
-    likeBtn.className = 'like-btn btn btn-sm liked';
-    liker(item.id, likeCount);
-  });
-  const likes = likesData.filter((e) => e.item_id === item.id);
-  if (likes.length > 0) {
-    likeCount.innerText = likes[0].likes;
-  }
+  const [likeBtn, likeCount] = setLikeSpan(item.id);
   cardBody.appendChild(commentBtn);
   likeBtn.appendChild(likeCount);
   cardBody.appendChild(likeBtn);
