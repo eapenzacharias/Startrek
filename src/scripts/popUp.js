@@ -15,10 +15,12 @@ export const sendComment = async (id, user, comment) => {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
-  } catch (error) {
-    // console.log(`ERROR: ${error}`);
+  } catch (error) {   
   }
 };
+
+
+const CountComments=(obj)=> obj.length;
 
 export const ReceiveComments = async (id) => {
   let items;
@@ -27,8 +29,7 @@ export const ReceiveComments = async (id) => {
       method: 'GET',
     });
     items = await URL.json();
-  } catch (error) {
-    // console.log(`ERROR IN GET: ${error}`);
+  } catch (error) {   
   }
 
   const allCommentsContainer = document.getElementById('allComments');
@@ -61,10 +62,9 @@ export const ReceiveComments = async (id) => {
       figcaption.innerText = `${items[j].creation_date} Comment by:  ${items[j].username}`;
     }
     allCommentsContainer.appendChild(ulComments);
-    getElement('#numbersCommentsTitle').innerHTML = `Comments  (${items.length})`;
-  } else {
-    // console.log('NO COMMENTS');
-  }
+    const numbersComments=CountComments(items);
+    getElement('#numbersCommentsTitle').innerHTML = `Comments  (${numbersComments})`;
+  } 
   return items.length;
 };
 
