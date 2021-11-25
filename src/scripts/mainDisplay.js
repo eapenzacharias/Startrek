@@ -70,10 +70,13 @@ const generateCards = (item) => {
   commentBtn.innerText = 'Comments';
   commentBtn.addEventListener('click', () => {
     getElement('#main').appendChild(popUp(item));
+    getElement('#top-header').classList.toggle('blur-all');
+    getElement('#card-container').classList.toggle('blur-all');
     getElement('#staticBackdrop').classList = 'displayModal show fade modal';
     getElement('#btnClose').addEventListener('click', () => {
-      getElement('#staticBackdrop').classList = 'fade modal';
       getElement('#staticBackdrop').outerHTML = '';
+      getElement('#top-header').classList.toggle('blur-all');
+      getElement('#card-container').classList.toggle('blur-all');
     });
   });
   const [likeBtn, likeCount] = setLikeSpan(item.id);

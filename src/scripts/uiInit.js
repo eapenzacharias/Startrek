@@ -54,7 +54,10 @@ const appInit = async () => {
     .then(() => dragons())
     .then(() => getLikes())
     .then(() => header())
-    .then(() => mainDisplay('rocketsData'));
+    .then(() => {
+      mainDisplay('rocketsData');
+      getElement('#loading').className = 'hidden-loader';
+    });
 };
 
 export { header, footer, appInit };
