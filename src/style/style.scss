@@ -2,19 +2,18 @@
 @import "./popup.scss";
 
 body {
-  background-image: url("https://intl.startrek.com/themes/custom/startrekbs/images/bg_site-constrain_stars_2000x1080.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   height: 100%;
+  background: url("https://intl.startrek.com/themes/custom/startrekbs/images/bg_site-constrain_stars_2000x1080.jpg")
+    no-repeat center center fixed;
+  background-size: cover;
 
   #main {
-    height: 100vh;
-    min-height: 100vh;
-    position: relative;
+    margin-top: 3rem;
   }
 
   nav {
     font-size: 1.3rem;
+    background-color: #000000af;
 
     .navbar-nav {
       li {
