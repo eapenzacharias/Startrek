@@ -1,7 +1,7 @@
 import { getLikes } from './interaction.js';
 import mainDisplay from './mainDisplay.js';
 import { createElement, getElement } from './querySelectors.js';
-import { dragons, rockets } from './spaceData.js';
+import { dragons, itemCounter, rockets } from './spaceData.js';
 
 const menuEvents = (rockets, ships) => {
   rockets.addEventListener('click', () => {
@@ -16,16 +16,20 @@ const menuEvents = (rockets, ships) => {
 };
 
 const header = () => {
+  const rocketsData = JSON.parse(sessionStorage.getItem('rocketsData'));
+  const dragonsData = JSON.parse(sessionStorage.getItem('dragonsData'));
+  const rocketCount = itemCounter(rocketsData);
+  const dragonCount = itemCounter(dragonsData);
   const menu = createElement('ul');
   menu.className = 'nav navbar-nav';
   const rocketContainer = createElement('li');
   let rockets = createElement('a');
   rockets.className = 'nav-link';
-  rockets.innerText = 'Rockets';
+  rockets.innerText = `Rockets (${rocketCount})`;
   const shipsContainer = createElement('li');
   let ships = createElement('a');
   ships.className = 'nav-link';
-  ships.innerText = 'Capsules';
+  ships.innerText = `Capsules (${dragonCount})`;
   [rockets, ships] = menuEvents(rockets, ships);
   rocketContainer.appendChild(rockets);
   menu.appendChild(rocketContainer);
@@ -49,6 +53,7 @@ const appInit = async () => {
   await rockets()
     .then(() => dragons())
     .then(() => getLikes())
+    .then(() => header())
     .then(() => mainDisplay('rocketsData'));
 };
 

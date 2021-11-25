@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "webpack --mode production",
-    "watch": "jest --watch",
+    "watch": "jest --watch *.js",
     "start": "webpack serve --open",
     "deploy": "gh-pages -d dist"
   },
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/eapenzacharias/Startrek#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.5.1",
     "eslint": "^7.32.0",

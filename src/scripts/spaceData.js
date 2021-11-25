@@ -22,4 +22,6 @@ const dragons = async () => {
   return dragonsData;
 };
 
-export { rockets, dragons };
+const itemCounter = (items) => items.length;
+
+export { rockets, dragons, itemCounter };
