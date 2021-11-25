@@ -6,9 +6,34 @@ body {
   background: url("https://intl.startrek.com/themes/custom/startrekbs/images/bg_site-constrain_stars_2000x1080.jpg")
     no-repeat center center fixed;
   background-size: cover;
+  .navbar-toggler-icon {
+    background-image: url("https://img.icons8.com/material-outlined/24/ffffff/menu--v1.png");
+  }
+
+  .header {
+    min-height: 50vh;
+    background: url("https://www.spacex.com/static/images/crew-2/return/HP_Crew-2_Return_Website_01_Desktop.jpg")
+      no-repeat center center fixed;
+    h1 {
+      text-transform: uppercase;
+    }
+    h1,
+    h2,
+    p {
+      margin: 1rem 0;
+    }
+    .btn {
+      margin-top: 3rem;
+    }
+    .intro {
+      color: #f5f3f3;
+      padding: 5rem 3rem;
+      margin-bottom: 2rem;
+    }
+  }
 
   #main {
-    margin-top: 3rem;
+    padding-top: 6rem;
   }
 
   nav {
@@ -26,8 +51,8 @@ body {
         }
 
         .nav-link:hover {
-          border-radius: 0.5rem;
-          background-color: #ffffff1a;
+          text-decoration: underline;
+          cursor: pointer;
         }
 
         .nav-link:active {
