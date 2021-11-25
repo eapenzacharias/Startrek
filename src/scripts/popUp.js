@@ -191,7 +191,6 @@ const popUp = (item) => {
   col22.innerText = item.active;
   trBody.appendChild(col22);
 
-
   const anchorWiki = createElement('a');
 
   anchorWiki.setAttribute('href', item.wikipedia);
