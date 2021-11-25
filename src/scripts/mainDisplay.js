@@ -1,5 +1,5 @@
 import { likesCounter, postLikes } from './interaction.js';
-import popUp from './popUp.js';
+import { popUp } from './popUp.js';
 import { createElement, getElement } from './querySelectors.js';
 
 const cardTemplate = (item) => {
