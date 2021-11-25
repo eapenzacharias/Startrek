@@ -14,21 +14,44 @@ export const sendComment = async (id, user, comment) => {
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
       },
+    }).then((response) => {
+      if (response.ok === false) {
+        throw new Error('Something went wrong');
+      }
     });
   } catch (error) {
-    // console.log(`ERROR: ${error}`);
+    const alert = createElement('div');
+    alert.className = 'alert alert-danger';
+    alert.setAttribute('role', 'alert');
+    alert.innerText = 'ERROR';
+    getElement('#staticBackdrop').appendChild(alert);
   }
 };
 
+const CountComments = (obj) => obj.length;
+
 export const ReceiveComments = async (id) => {
-  let items;
+  let items = [];
   try {
-    const URL = await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=${id}`, {
-      method: 'GET',
-    });
-    items = await URL.json();
+    await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=${id}`)
+      .then(async (response) => {
+        if (response.ok === false) {
+          if (response.status === 400) {
+            throw new Error('400');
+          }
+          throw new Error('Something went wrong');
+        } else {
+          items = await response.json();
+        }
+      });
   } catch (error) {
-    // console.log(`ERROR IN GET: ${error}`);
+    if (error.message !== '400') {
+      const alert = createElement('div');
+      alert.className = 'alert alert-danger';
+      alert.setAttribute('role', 'alert');
+      alert.innerText = 'ERROR';
+      getElement('#staticBackdrop').appendChild(alert);
+    }
   }
 
   const allCommentsContainer = document.getElementById('allComments');
@@ -61,9 +84,8 @@ export const ReceiveComments = async (id) => {
       figcaption.innerText = `${items[j].creation_date} Comment by:  ${items[j].username}`;
     }
     allCommentsContainer.appendChild(ulComments);
-    getElement('#numbersCommentsTitle').innerHTML = `Comments  (${items.length})`;
-  } else {
-    // console.log('NO COMMENTS');
+    const numbersComments = CountComments(items);
+    getElement('#numbersCommentsTitle').innerHTML = `Comments  (${numbersComments})`;
   }
   return items.length;
 };
