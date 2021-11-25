@@ -1,9 +1,13 @@
+[![Linters](https://github.com/eapenzacharias/Startrek/actions/workflows/linters.yml/badge.svg)](https://github.com/eapenzacharias/Startrek/actions/workflows/linters.yml) [![NodeJS with Webpack](https://github.com/eapenzacharias/Startrek/actions/workflows/webpack.yml/badge.svg)](https://github.com/eapenzacharias/Startrek/actions/workflows/webpack.yml)
+
 # Startrek
 
 > Build a Spaceship catelog
 
+![capstone-1](https://user-images.githubusercontent.com/49812651/143505056-ece5ff7f-cf9d-4f34-a82a-c6146b243e41.png)
+![capstone-2](https://user-images.githubusercontent.com/49812651/143505066-d7e6dc40-6f00-4551-ae11-22a0a313e8d2.png)
 
-.
+A project to display information about SpaceX Rockets and Capsules. User has the option to like and comment on each item. Information about the items is fetched from [SpaceX API](https://github.com/r-spacex/SpaceX-API)
 
 ### [Live Project](https://eapenzacharias.github.io/Startrek/)
 
@@ -12,6 +16,7 @@
 - JavaScript, HTML, SCSS
 - Webpack
 - Bootstrap
+- [SpaceX API](https://github.com/r-spacex/SpaceX-API)
 
 ## Getting Started
 
