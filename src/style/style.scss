@@ -1,5 +1,6 @@
 @import "./main.scss";
 @import "./popup.scss";
+@import "./loading.scss";
 
 body {
   height: 100%;
@@ -23,9 +24,12 @@ body {
     }
 
     h1,
-    h2,
     p {
       margin: 1rem 0;
+    }
+
+    h2 {
+      margin: 1.5rem 0;
     }
 
     .btn {
@@ -40,7 +44,7 @@ body {
   }
 
   #main {
-    padding-top: 6rem;
+    padding-top: 3rem;
   }
 
   nav {
@@ -74,5 +78,9 @@ body {
     color: #f5f3f3a4;
     padding: 1rem 0;
     margin-top: 3rem;
+  }
+
+  .blur-all {
+    filter: blur(4px);
   }
 }

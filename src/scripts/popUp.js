@@ -58,30 +58,37 @@ export const ReceiveComments = async (id) => {
   allCommentsContainer.innerHTML = '';
   const ulComments = createElement('div');
   ulComments.id = 'ulComments';
-  ulComments.className = '';
+  ulComments.className = 'col-12';
 
   if (items.length) {
     for (let j = 0; j < items.length; j += 1) {
       const lsComments = createElement('div');
+      lsComments.className = 'row';
       ulComments.appendChild(lsComments);
 
-      const figure = createElement('figure');
-      figure.className = 'text-left';
+      const figure = createElement('div');
+      figure.className = 'text-left col-12';
       lsComments.appendChild(figure);
 
-      const blockquoteItem = createElement('blockquote');
-      blockquoteItem.className = 'blockquote';
+      const blockquoteItem = createElement('div');
+      blockquoteItem.className = 'blockquote col-lg-12 col';
       figure.appendChild(blockquoteItem);
 
-      const commentText = createElement('p');
+      const commentText = createElement('div');
       commentText.className = 'alert alert-dark h6';
-      commentText.innerText = items[j].comment;
+      // commentText.innerText = items[j].comment;
+      const commentTextP = createElement('p');
+      commentTextP.innerText = items[j].comment;
+      commentText.appendChild(commentTextP);
       blockquoteItem.appendChild(commentText);
 
       const figcaption = createElement('figcaption');
-      figcaption.className = 'footer text-light h6  smallText';
-      figure.appendChild(figcaption);
-      figcaption.innerText = `${items[j].creation_date} Comment by:  ${items[j].username}`;
+      figcaption.className = 'text-dark  smallText';
+      commentText.appendChild(figcaption);
+      figcaption.innerHTML = `
+      <span id="comment-date">${items[j].creation_date}</span>
+      <span id="comment-user">${items[j].username}</span>
+      `;
     }
     allCommentsContainer.appendChild(ulComments);
     const numbersComments = CountComments(items);
@@ -123,30 +130,33 @@ const popUp = (item) => {
   row1.className = 'row';
   containerFluid.appendChild(row1);
   const col1 = createElement('div');
-  col1.className = 'col-12 red text-center';
+  col1.className = 'col-lg-6 col text-center';
   row1.appendChild(col1);
+  const col2 = createElement('div');
+  col2.className = 'col-lg-6 col item-detail';
+
   const imgMain = createElement('img');
   imgMain.className = 'img-fluid ';
   const imgSRC = item.flickr_images[0];
   imgMain.src = imgSRC;
   col1.appendChild(imgMain);
 
-  const rowTitle = createElement('div');
-  rowTitle.className = 'row';
-  containerFluid.appendChild(rowTitle);
-  const bigTitle = createElement('h1');
-  bigTitle.className = 'col-12 text-center';
+  // const rowTitle = createElement('div');
+  // rowTitle.className = 'row';
+  // containerFluid.appendChild(rowTitle);
+  const bigTitle = createElement('h2');
+  bigTitle.className = 'col-12 display-4';
   bigTitle.innerText = item.name;
-  rowTitle.appendChild(bigTitle);
-
+  // rowTitle.appendChild(bigTitle);
+  col2.appendChild(bigTitle);
   const row2 = createElement('div');
   row2.className = 'row table-responsive';
-  containerFluid.appendChild(row2);
-
+  // containerFluid.appendChild(row2);
+  row1.appendChild(col2);
   const detailTable = createElement('table');
   detailTable.className = 'table table-dark table-borderless table-sm';
   row2.appendChild(detailTable);
-
+  col2.appendChild(row2);
   const thead = createElement('thead');
   thead.className = '';
   detailTable.appendChild(thead);
@@ -165,10 +175,10 @@ const popUp = (item) => {
   thHead2.innerText = 'Active';
   trHead.appendChild(thHead2);
 
-  const thHead3 = createElement('th');
-  thHead3.scope = 'col';
-  thHead3.innerText = 'Check details';
-  trHead.appendChild(thHead3);
+  // const thHead3 = createElement('th');
+  // thHead3.scope = 'col';
+  // thHead3.innerText = 'Check details';
+  // trHead.appendChild(thHead3);
 
   const tbody = createElement('tbody');
   detailTable.appendChild(tbody);
@@ -187,10 +197,10 @@ const popUp = (item) => {
   col22.innerText = item.active;
   trBody.appendChild(col22);
 
-  const col23 = createElement('td');
-  col23.className = 'col-4 table-dark"';
+  // const col23 = createElement('td');
+  // col23.className = 'col-4 table-dark"';
 
-  trBody.appendChild(col23);
+  // trBody.appendChild(col23);
 
   const anchorWiki = createElement('a');
 
@@ -198,15 +208,16 @@ const popUp = (item) => {
   anchorWiki.setAttribute('target', '_blank');
   anchorWiki.className = 'btn btn-light btn-sm';
   anchorWiki.innerText = 'Show official information';
-  col23.appendChild(anchorWiki);
+  // col23.appendChild(anchorWiki);
 
-  const row3 = createElement('div');
-  row3.className = 'row';
-  containerFluid.appendChild(row3);
+  // const row3 = createElement('div');
+  // row3.className = 'row';
+  // containerFluid.appendChild(row3);
   const col3 = createElement('div');
   col3.className = 'col-12 red';
   col3.innerText = item.description;
-  row3.appendChild(col3);
+  col2.appendChild(col3);
+  col2.appendChild(anchorWiki);
 
   const numbersComments = createElement('div');
   numbersComments.className = 'row';
@@ -243,15 +254,15 @@ const popUp = (item) => {
   addComment.appendChild(addCommentTitle);
 
   const commentForm = createElement('div');
-  commentForm.className = 'col-12 col-lg-10 ';
-  containerFluid.appendChild(commentForm);
+  commentForm.className = 'col-12 col-lg-8 comment-form';
+  addComment.appendChild(commentForm);
 
   const nameContent = createElement('div');
   nameContent.className = 'input-group mb-3 col-4';
   commentForm.appendChild(nameContent);
 
   const spanForm = createElement('span');
-  spanForm.className = 'input-group-text btn btn-dark';
+  spanForm.className = 'input-group-text btn btn-light';
   spanForm.innerText = '@';
   nameContent.appendChild(spanForm);
 
@@ -266,13 +277,13 @@ const popUp = (item) => {
   commentForm.appendChild(commentContent);
 
   const txtComment = createElement('textarea');
-  txtComment.className = 'form-control col-4';
+  txtComment.className = 'form-control col';
   txtComment.placeholder = 'Your insights';
   txtComment.id = 'txtComment ';
   commentContent.appendChild(txtComment);
 
   const btnComment = createElement('button');
-  btnComment.className = 'btn btn-dark';
+  btnComment.className = 'btn btn-light';
   btnComment.id = 'btnComment';
   btnComment.innerText = 'Comment';
   btnComment.addEventListener('click', async () => {
@@ -284,7 +295,7 @@ const popUp = (item) => {
     }
   });
 
-  containerFluid.appendChild(btnComment);
+  commentForm.appendChild(btnComment);
 
   modalDialog.appendChild(modalContent);
   modalContent.appendChild(modalHeader);
