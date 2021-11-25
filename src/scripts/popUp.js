@@ -297,4 +297,4 @@ const popUp = (item) => {
   return modal;
 };
 
-export default popUp;
+export { popUp, CountComments };
