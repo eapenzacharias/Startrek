@@ -1,6 +1,9 @@
 import { createElement, getElement } from './querySelectors.js';
+import sanitize from './sanitize.js';
 
 export const sendComment = async (id, user, comment) => {
+  user = sanitize(user);
+  comment = sanitize(comment);
   try {
     await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/j16hQlfOqes4CaGLmngc/comments', {
       method: 'POST',
@@ -75,7 +78,7 @@ export const ReceiveComments = async (id) => {
       figure.appendChild(blockquoteItem);
 
       const commentText = createElement('div');
-      commentText.className = 'alert alert-dark h6';      
+      commentText.className = 'alert alert-dark h6';
       const commentTextP = createElement('p');
       commentTextP.innerText = items[j].comment;
       commentText.appendChild(commentTextP);
@@ -195,7 +198,6 @@ const popUp = (item) => {
   anchorWiki.setAttribute('target', '_blank');
   anchorWiki.className = 'btn btn-light btn-sm';
   anchorWiki.innerText = 'Show official information';
-  
   const col3 = createElement('div');
   col3.className = 'col-12 red';
   col3.innerText = item.description;
