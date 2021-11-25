@@ -69,11 +69,11 @@ const generateCards = (item) => {
   commentBtn.className = 'btn btn-sm btn-light';
   commentBtn.innerText = 'Comments';
   commentBtn.addEventListener('click', () => {
-    commentBtn.className = 'btn btn-sm btn-dark';
     getElement('#main').appendChild(popUp(item));
     getElement('#staticBackdrop').classList = 'displayModal show fade modal';
     getElement('#btnClose').addEventListener('click', () => {
       getElement('#staticBackdrop').classList = 'fade modal';
+      getElement('#staticBackdrop').outerHTML = '';
     });
   });
   const [likeBtn, likeCount] = setLikeSpan(item.id);

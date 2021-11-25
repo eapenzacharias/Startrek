@@ -3,9 +3,13 @@
   min-height: 80vh;
 
   .card {
-    background-color: #ffffff10;
+    background-color: #000000b0;
+    border: 1px #6b6b6b solid !important;
+    border-radius: 0.5rem;
     max-width: 500px;
+    min-width: 350px;
     margin: 1rem;
+    padding: 0.5rem;
 
     img {
       height: 300px;
@@ -32,6 +36,7 @@
         min-width: 30px;
         min-height: 30px;
         background-color: #f5f3f3;
+        cursor: default;
       }
 
       .liked {
