@@ -141,17 +141,14 @@ const popUp = (item) => {
   imgMain.src = imgSRC;
   col1.appendChild(imgMain);
 
-  // const rowTitle = createElement('div');
-  // rowTitle.className = 'row';
-  // containerFluid.appendChild(rowTitle);
   const bigTitle = createElement('h2');
   bigTitle.className = 'col-12 display-4';
   bigTitle.innerText = item.name;
-  // rowTitle.appendChild(bigTitle);
+
   col2.appendChild(bigTitle);
   const row2 = createElement('div');
   row2.className = 'row table-responsive';
-  // containerFluid.appendChild(row2);
+
   row1.appendChild(col2);
   const detailTable = createElement('table');
   detailTable.className = 'table table-dark table-borderless table-sm';
@@ -175,11 +172,6 @@ const popUp = (item) => {
   thHead2.innerText = 'Active';
   trHead.appendChild(thHead2);
 
-  // const thHead3 = createElement('th');
-  // thHead3.scope = 'col';
-  // thHead3.innerText = 'Check details';
-  // trHead.appendChild(thHead3);
-
   const tbody = createElement('tbody');
   detailTable.appendChild(tbody);
 
@@ -197,10 +189,6 @@ const popUp = (item) => {
   col22.innerText = item.active;
   trBody.appendChild(col22);
 
-  // const col23 = createElement('td');
-  // col23.className = 'col-4 table-dark"';
-
-  // trBody.appendChild(col23);
 
   const anchorWiki = createElement('a');
 
@@ -208,11 +196,7 @@ const popUp = (item) => {
   anchorWiki.setAttribute('target', '_blank');
   anchorWiki.className = 'btn btn-light btn-sm';
   anchorWiki.innerText = 'Show official information';
-  // col23.appendChild(anchorWiki);
-
-  // const row3 = createElement('div');
-  // row3.className = 'row';
-  // containerFluid.appendChild(row3);
+  
   const col3 = createElement('div');
   col3.className = 'col-12 red';
   col3.innerText = item.description;
