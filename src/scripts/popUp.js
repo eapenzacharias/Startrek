@@ -80,7 +80,7 @@ export const ReceiveComments = async (id) => {
       const commentText = createElement('div');
       commentText.className = 'alert alert-dark h6';
       const commentTextP = createElement('p');
-      commentTextP.innerText = items[j].comment;
+      commentTextP.innerHTML = items[j].comment;
       commentText.appendChild(commentTextP);
       blockquoteItem.appendChild(commentText);
 
