@@ -2,7 +2,7 @@ import { createElement, getElement } from './querySelectors.js';
 
 export const sendComment = async (id, user, comment) => {
   try {
-    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments', {
+    await fetch('https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/j16hQlfOqes4CaGLmngc/comments', {
       method: 'POST',
       body: JSON.stringify(
         {
@@ -33,7 +33,7 @@ const CountComments = (obj) => obj.length;
 export const ReceiveComments = async (id) => {
   let items = [];
   try {
-    await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/F7stpUzdG6g4vBIK95rU/comments?item_id=${id}`)
+    await fetch(`https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/j16hQlfOqes4CaGLmngc/comments?item_id=${id}`)
       .then(async (response) => {
         if (response.ok === false) {
           if (response.status === 400) {
@@ -75,8 +75,7 @@ export const ReceiveComments = async (id) => {
       figure.appendChild(blockquoteItem);
 
       const commentText = createElement('div');
-      commentText.className = 'alert alert-dark h6';
-      // commentText.innerText = items[j].comment;
+      commentText.className = 'alert alert-dark h6';      
       const commentTextP = createElement('p');
       commentTextP.innerText = items[j].comment;
       commentText.appendChild(commentTextP);

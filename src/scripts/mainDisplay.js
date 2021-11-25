@@ -73,8 +73,7 @@ const generateCards = (item) => {
     getElement('#top-header').classList.toggle('blur-all');
     getElement('#card-container').classList.toggle('blur-all');
     getElement('#staticBackdrop').classList = 'displayModal show fade modal';
-    getElement('#btnClose').addEventListener('click', () => {
-      // getElement('#staticBackdrop').classList = 'fade modal';
+    getElement('#btnClose').addEventListener('click', () => {      
       getElement('#staticBackdrop').outerHTML = '';
       getElement('#top-header').classList.toggle('blur-all');
       getElement('#card-container').classList.toggle('blur-all');
