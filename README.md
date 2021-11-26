@@ -1,4 +1,4 @@
-[![Linters](https://github.com/eapenzacharias/Startrek/actions/workflows/linters.yml/badge.svg)](https://github.com/eapenzacharias/Startrek/actions/workflows/linters.yml) [![NodeJS with Webpack](https://github.com/eapenzacharias/Startrek/actions/workflows/webpack.yml/badge.svg)](https://github.com/eapenzacharias/Startrek/actions/workflows/webpack.yml)
+[![Linters](https://github.com/eapenzacharias/Startrek/actions/workflows/linters.yml/badge.svg)](https://github.com/eapenzacharias/Startrek/actions/workflows/linters.yml) [![NodeJS with Webpack](https://github.com/eapenzacharias/Startrek/actions/workflows/webpack.yml/badge.svg?branch=dev)](https://github.com/eapenzacharias/Startrek/actions/workflows/webpack.yml)
 
 # Startrek
 
