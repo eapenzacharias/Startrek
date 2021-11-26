@@ -14,9 +14,10 @@ A project to display information about SpaceX Rockets and Capsules. User has the
 ## Built With
 
 - JavaScript, HTML, SCSS
-- Webpack
-- Bootstrap
+- [Webpack](https://webpack.js.org/)
+- [Bootstrap](ttps://getbootstrap.com/)
 - [SpaceX API](https://github.com/r-spacex/SpaceX-API)
+- [Jest](https://jestjs.io/)
 
 ## Getting Started
 
@@ -63,6 +64,9 @@ Run webpack dev server for development
 Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](../../issues/).
+
+## Acknowledgments
+- Loading Animation CSS - [Tatsuya Azegami](https://codepen.io/42EG4M1)
 
 ## Show your support
 
