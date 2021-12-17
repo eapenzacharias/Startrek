@@ -2,7 +2,7 @@
 
 # Startrek
 
-> Build a Spaceship catelog
+> Build a Spaceship catalog
 
 ![capstone-1](https://user-images.githubusercontent.com/49812651/143505056-ece5ff7f-cf9d-4f34-a82a-c6146b243e41.png)
 ![capstone-2](https://user-images.githubusercontent.com/49812651/143505066-d7e6dc40-6f00-4551-ae11-22a0a313e8d2.png)
