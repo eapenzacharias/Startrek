@@ -246,12 +246,12 @@ const popUp = (item) => {
   commentForm.appendChild(nameContent);
 
   const spanForm = createElement('span');
-  spanForm.className = 'input-group-text btn btn-light';
+  spanForm.className = 'input-group-text btn btn-light span-2';
   spanForm.innerText = '@';
   nameContent.appendChild(spanForm);
 
   const txtName = createElement('input');
-  txtName.className = 'span-4';
+  txtName.className = 'form-control';
   txtName.id = 'txtName';
   txtName.placeholder = 'Your name';
   nameContent.appendChild(txtName);
