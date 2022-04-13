@@ -42,8 +42,9 @@ const header = () => {
 const footer = () => {
   const footer = getElement('#foot-text-area');
   const container = createElement('div');
+  const text = 'Created by <a href="https://github.com/eapenzacharias" target="_blank" class="badge bg-light text-dark">@eapenzacharias</a> & <a href="https://github.com/JasemDuncan" target="_blank" class="badge bg-light text-dark">@jasemduncan</a>';
   container.className = 'container-fluid';
-  container.innerText = 'Create by Microverse under CC license';
+  container.innerHTML = text;
 
   footer.appendChild(container);
   return footer;
